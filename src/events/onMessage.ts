@@ -99,20 +99,7 @@ export default async function onMessage (client: Client, msg: Message) {
         const index = cache.push(msg.author.id) - 1
         setTimeout(() => cache.splice(index), 24 * 60 * 60 * 1000)
         target.default(client, msg, query, locale)
-      } else {
-        if (hasPermissions(client.user.id, channel, ['EMBED_LINKS'])) {
-          const embed = new DefaultEmbed('welcome', null, {
-            title: locale('give_me_heart_title'),
-            description:
-              locale('give_me_heart_description') + '\n\n' +
-              locale('give_me_heart_button_1', client.config.koreanbots.profileURL) + ' • ' +
-              locale('give_me_heart_button_2', 'https://github.com/lofi-with-discord/LofiGirl')
-          })
-          msg.channel.send(embed)
-        } else {
-          msg.channel.send(locale('give_me_heart_no_embed', client.config.koreanbots.profileURL))
-        }
-      }
+      } 
     } else target.default(client, msg, query, locale)
   } else target.default(client, msg, query, locale)
 }
